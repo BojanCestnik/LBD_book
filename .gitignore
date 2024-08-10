@@ -1,2 +1,4 @@
 # exclude files
 venv/
+notebooks/output/
+chat_prompt.txt
