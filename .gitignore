@@ -1,5 +1,7 @@
 # exclude files
 venv/
 notebooks/output/
+notebooks/.ipynb_checkpoints/
+notebooks/__pycache__/
 chat_prompt.txt
 TODO*.*
