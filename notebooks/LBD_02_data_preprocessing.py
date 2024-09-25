@@ -483,7 +483,7 @@ def preprocess(corpus, keep_list, remove_list, mesh_word_list, \
         corpus = [[x for x in x.split()] for x in corpus]
     
     if lemmatization == True:
-        logging.info('Lematization ...')
+        logging.info('Lemmatization ...')
         corpus = do_lemmatize(corpus)
 
     if min_word_length > 0:

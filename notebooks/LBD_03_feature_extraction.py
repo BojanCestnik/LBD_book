@@ -205,7 +205,7 @@ def filter_matrix_columns(word_list: List, any_matrix: np.ndarray, filter_rows: 
 # the vectorizer.fit_transform() method. The matrix is stored in the Compressed Sparse Row (CSR) format (csr_matrix) 
 # for efficient storage and computation.
 # 
-# Finally, the function returns a tuple containing the list of features *TfidfVectorizer.get_feature_names_out().tolist()* that correspond to the columns of the TF-IDF matrix and the TF-IDF matrix *tfidf_matrix.todense()*.
+# Finally, the function returns a tuple containing the list of features *TfidfVectorizer.get_feature_names_out().tolist()* that correspond to the columns of the TF-IDF matrix and the TF-IDF matrix *tfidf_matrix*.
 # 
 # 
 
