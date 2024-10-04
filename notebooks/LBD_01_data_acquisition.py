@@ -9,7 +9,7 @@
 
 # Import python libraries:
 
-# In[ ]:
+# In[2]:
 
 
 import os
@@ -71,7 +71,7 @@ import logging
 # - *File encoding*: The function currently opens the file with the default system encoding. If you're working with files in different encodings (like UTF-8), you may need to adjust the `open` function to handle these encodings explicitly.
 # - *Error handling*: The function raises an error if the file does not exist.
 
-# In[ ]:
+# In[3]:
 
 
 def load_data_from_file(file_path: str) -> List[str]:
@@ -127,7 +127,7 @@ def load_data_from_file(file_path: str) -> List[str]:
 #   
 # - *Use cases for ASCII encoding*: While ASCII encoding is widely supported, it is limited in terms of characters that can be displayed. For text data containing international characters, other encodings such as UTF-8 are more suitable unless you have certain restrictions that require ASCII.
 
-# In[ ]:
+# In[4]:
 
 
 def convert_file_to_ascii_encoding(input_filename: str, output_filename: str) -> None:
@@ -182,7 +182,7 @@ def convert_file_to_ascii_encoding(input_filename: str, output_filename: str) ->
 # 
 # - *Data types*: This function is specifically designed for loading text data. If the column contains other data types (e.g., numeric or mixed types), further processing might be required.
 
-# In[ ]:
+# In[5]:
 
 
 def load_data_from_csv(file_path: str, column_name: str) -> List[str]:
@@ -243,7 +243,7 @@ def load_data_from_csv(file_path: str, column_name: str) -> List[str]:
 # 
 # To use this function, simply enter the URL of the web page from which you want to retrieve data. The function will return a list of strings, each representing a section of text from the page. This data can then be further processed for your specific analysis requirements.
 
-# In[ ]:
+# In[6]:
 
 
 def load_data_from_web(url: str) -> List[str]:
@@ -270,7 +270,7 @@ def load_data_from_web(url: str) -> List[str]:
 # 
 # Define the URL and the parameters to be used for retrieving articles from PubMed. Define the class `PubMedArticleRetriever` for searching (function `esearch`) and retrieving (function `efetch`) articles from PubMed.
 
-# In[ ]:
+# In[7]:
 
 
 # Base URL
@@ -343,7 +343,7 @@ class PubMedArticleRetriever():
 # 
 # To use this function, pass a dictionary in which each entry contains relevant document details, along with a string for the domain name. The function returns a list of formatted strings, each representing an entry in the dictionary. This output can then be used for further processing, storage or analysis.
 
-# In[ ]:
+# In[8]:
 
 
 def convert_dict_to_list(dictionary: Dict[str, Any], domain_name: str) -> List[str]:
@@ -363,51 +363,24 @@ def convert_dict_to_list(dictionary: Dict[str, Any], domain_name: str) -> List[s
 # 
 # **Functionality**
 # 
-# 1. *Initializing the PubMed Article Retriever*:
-#    The function begins by creating an instance of `PubMedArticleRetriever`, a tool for querying PubMed:
-#    ```python
-#    pubmedAR = PubMedArticleRetriever()
-#    ```
+# 1. *Initializing the PubMed article retriever*:
+#    The function begins by creating an instance of `PubMedArticleRetriever`, a tool for querying PubMed.
 # 
-# 2. *Performing a PubMed Search*:
+# 2. *Performing a PubMed search*:
 #    The function searches PubMed for articles matching the specified criteria:
-#    ```python
-#    esearch_root = pubmedAR.esearch(search_term=search_str, datetype='pdat', mindate=min_date, maxdate=max_date)
-#    ```
 #    - *Search term*: The `search_str` parameter specifies the query (e.g., keywords or phrases).
 #    - *Date range*: The `min_date` and `max_date` parameters define the publication date range for the search.
 # 
 # 3. *Retrieving PMIDs*:
 #    The function extracts PubMed IDs (PMIDs) for the articles found in the search:
-#    ```python
-#    pmid_lst = [id.text for id in esearch_root.findall('IdList/Id')]
-#    logging.info(f'Number of PMIDs: {len(pmid_lst)}')
-#    logging.info(f'List of PMIDs: {pmid_lst}')
-#    ```
 #    - *PMIDs*: Unique identifiers for PubMed articles, used to fetch detailed information.
 # 
 # 4. *Fetching article details*:
 #    The function retrieves the detailed information (title and abstract) for each article:
-#    ```python
-#    efetch_lst = pubmedAR.efetch(pmid_lst)
-#    c_dct = {}
-#    for chunk in efetch_lst:
-#        for medline_citation in chunk.findall('.//MedlineCitation'):
-#            pmid = medline_citation.find('PMID')
-#            article = medline_citation.find('./Article')
-#            title = article.find('ArticleTitle')
-#            abstracte = article.find('Abstract/AbstractText')
-#            abstract = '' if abstracte is None else abstracte.text
-#            c_dct[pmid.text] = {'title': title.text, 'abstract': abstract}
-#    ```
 #    - *Title and abstract extraction*: The function extracts and stores the title and abstract for each article, handling cases where the abstract might be missing.
 # 
-# 5. *Converting to a List of Strings*:
-#    The extracted data is then converted into a list of formatted strings using the `convert_dict_to_list` function:
-#    ```python
-#    lines = convert_dict_to_list(c_dct, domain_name)
-#    return lines
-#    ```
+# 5. *Converting to a List of strings*:
+#    The extracted data is then converted into a list of formatted strings using the `convert_dict_to_list` function.
 # 
 # **Meaning**
 # 
@@ -425,10 +398,10 @@ def convert_dict_to_list(dictionary: Dict[str, Any], domain_name: str) -> List[s
 # 
 # For example, to retrieve articles from PubMed about *migraine* and *magnesium* in the title or abstract, from the year 1988, with the domain name *mig_mag* (stored in the line as *!mig_mag*), the call of the function is as follows:
 # ```python
-# lines = load_data_from_pubmed('migraine&magnesium[tiab]', '1988/01/01', '1988/12/31', 'mig_mag')
+# lines = load_data_from_pubmed('migraine[tiab] AND magnesium[tiab]', '1988/01/01', '1988/12/31', 'mig_mag')
 # ```
 
-# In[28]:
+# In[9]:
 
 
 def load_data_from_pubmed(search_str: str, min_date: str, max_date: str, domain_name: str) -> List[str]:
@@ -439,43 +412,41 @@ def load_data_from_pubmed(search_str: str, min_date: str, max_date: str, domain_
     :param domain_name: str, domain name to be used to identify the documents,
     :return: List[str], a list of strings containing the text data
     """
-
+    
+    # 1. nitializing the PubMed article retriever
     pubmedAR = PubMedArticleRetriever()
-
+    
+    # 2. Performing a PubMed search
     esearch_root = pubmedAR.esearch(search_term = search_str, datetype = 'pdat', mindate = min_date, maxdate = max_date)
 
+    # 3. Retrieving PMIDs
     pmid_lst = [id.text for id in esearch_root.findall('IdList/Id')]
     logging.info(f'Number of PMIDs: {len(pmid_lst)}')
     logging.info(f'List of PMIDs: {pmid_lst}')
 
+    # 4. Fetching article details
     efetch_lst = pubmedAR.efetch(pmid_lst)
-    # print('efetch_lst: ', efetch_lst)
-
+ 
     c_dct = {}
     for chunk in efetch_lst:
         for medline_citation in chunk.findall('.//MedlineCitation'):
             pmid = medline_citation.find('PMID')
             article = medline_citation.find('./Article')
-            # print(type(article))
-            # xmlstr = ET.tostring(article)
-            # print(xmlstr)
             title = article.find('ArticleTitle')
             abstracte = article.find('Abstract/AbstractText')
             if abstracte is None:
                 abstract = ''
             else:
                 abstract = abstracte.text
-            # print(abstract)
             c_dct[pmid.text] = {'title': title.text, 'abstract': abstract} 
 
-    #return c_dct 
-
+    # 5. Converting to a List of strings
     lines = convert_dict_to_list(c_dct, domain_name)
 
     return lines
 
 
-# In[29]:
+# In[10]:
 
 
 import logging
@@ -486,12 +457,12 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 
 
-# In[ ]:
+# In[11]:
 
 
 import itertools
 
-#lines = load_data_from_pubmed('migraine&magnesium[tiab]', '1988/01/01', '1988/12/31', 'mig_mag')
+#lines = load_data_from_pubmed('migraine[tiab] AND magnesium[tiab]', '1988/01/01', '1988/12/31', 'mig_mag')
 #print(len(lines))
 #lines[:7]
 #dict(itertools.islice(lines.items(), 7))
