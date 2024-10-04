@@ -419,7 +419,7 @@ def do_keep_only_longer_or_equal_length_words(corpus, min_length):
 # In[ ]:
 
 
-def do_remove_non_nouns(corpus):
+def do_remove_non_nouns(corpus, keep_list):
     modified_corpus = []
     for sublist in corpus:
         modified_sublist = []
@@ -427,7 +427,9 @@ def do_remove_non_nouns(corpus):
         pos_terms = [(token.text, token.pos_) for token in doc]
         for term in pos_terms:
             # if (term[1] == 'NOUN') or (term[1] == 'PROPN') or (term[1] == 'ADJ') or (term[1] == 'VERB'):
-            if (term[1] == 'NOUN') or (term[1] == 'PROPN'):
+            if term[0] in keep_list:
+                modified_sublist.append(term[0])
+            elif (term[1] == 'NOUN') or (term[1] == 'PROPN'):
                 modified_sublist.append(term[0])
         modified_corpus.append(modified_sublist)
     return modified_corpus
@@ -492,7 +494,7 @@ def preprocess(corpus, keep_list, remove_list, mesh_word_list, \
 
     if keep_only_nouns:
         logging.info('Keeping only nouns ...')
-        corpus = do_remove_non_nouns(corpus)
+        corpus = do_remove_non_nouns(corpus, keep_list)
 
     if keep_only_mesh:
         logging.info('Keeping only selected MeSH terms ...')
