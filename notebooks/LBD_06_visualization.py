@@ -272,7 +272,10 @@ def visualize_tfidf_pca_interactive(names, domains_list, tfidf_matrix, transpose
     pca_result = pca.fit_transform(tfidf_matrix_transposed)
  
     # Generate colors for each point
-    colors = ['red', 'green', 'blue', 'yellow', 'black', 'grey', 'violet', 'brown', 'lime', 'cyan']*12
+    if True:
+        colors = ['red', 'orange', 'green', 'blue', 'yellow', 'grey', 'violet', 'brown', 'lime', 'cyan']*12
+    else:
+        colors = ['red', 'green', 'blue', 'yellow', 'black', 'grey', 'violet', 'brown', 'lime', 'cyan']*12
 
     # Determine unique clusters
     unique_clusters = list(set(domains_list))
