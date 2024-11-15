@@ -299,13 +299,13 @@ def visualize_tfidf_pca_interactive(names, domains_list, tfidf_matrix, transpose
                                  marker=dict(size=8, color=colors[cluster_num]), # , color=colors[cluster_num]
                                  name=unique_clusters[cluster_num],
                                  hovertext=[names[i] for i in cluster_docs_indices], # this text is shown on hover
-                                 text=[names[i] for i in cluster_docs_indices], # this text is set to show always
+                                 text='', # [names[i] for i in cluster_docs_indices], # this text is set to show always
                                  textposition='bottom center'))
 
         # Plot the centroid of the current cluster
         fig.add_trace(go.Scatter(x=[centroid_x], y=[centroid_y],
                                  mode='markers',
-                                 marker=dict(size=10, color=colors[cluster_num], symbol='star'),
+                                 marker=dict(size=16, color=colors[cluster_num], symbol='star'),
                                  name='Centroid ' + unique_clusters[cluster_num],
                                  hovertext='Centroid of ' + unique_clusters[cluster_num]))
 
