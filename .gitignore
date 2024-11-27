@@ -3,5 +3,6 @@ venv/
 notebooks/output/
 notebooks/.ipynb_checkpoints/
 notebooks/__pycache__/
+notebooks/spare.ipynb
 chat_prompt.txt
 TODO*.*
