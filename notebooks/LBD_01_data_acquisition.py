@@ -298,7 +298,7 @@ class PubMedArticleRetriever():
         ----------
         search_term : str
             A term for which the PubMed search should be performed.
-        kwargs: kwargs
+        kwargs : kwargs
             Additional keyword arguments to pass to the PubMed search as
             parameters.
         """
@@ -320,7 +320,7 @@ class PubMedArticleRetriever():
         chunk_lst = [pmid_lst[x : x + chunk_size] for x in range(0, len(pmid_lst), chunk_size)]
         res_lst = []
         for i, chunk in enumerate(chunk_lst, start=1):
-            logging.info(f'Fetching {chunk_size} articles of chunk: {i}/{len(chunk_lst)} till now: {len(res_lst)}')
+            logging.info(f'Fetching {chunk_size} articles of chunk: {i}/{len(chunk_lst)}')
             pmid_str = ','.join(pmid for pmid in chunk)
             params = {'db': 'pubmed',
                       'id': pmid_str,
@@ -332,7 +332,6 @@ class PubMedArticleRetriever():
             root = ET.fromstring(resp.content)
             res_lst.append(root)
             time.sleep(3)
-        logging.info(f'Fetched {len(res_lst)} articles')
         return res_lst
 
 
@@ -431,8 +430,7 @@ def load_data_from_pubmed(search_str: str, min_date: str, max_date: str, domain_
 
     # 4. Fetching article details
     efetch_lst = pubmedAR.efetch(pmid_lst)
-    logging.info(f'Size of efetch_lst: {len(efetch_lst)}')
-
+ 
     c_dct = {}
     for chunk in efetch_lst:
         for medline_citation in chunk.findall('.//MedlineCitation'):
